@@ -30,3 +30,4 @@ lerna-debug.log*
 backend/src/generated/prisma
 backend/prisma/dev.db
 backend/prisma/*.db-journal
+backend/prisma/dev.db
