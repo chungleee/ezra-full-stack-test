@@ -30,3 +30,7 @@ lerna-debug.log*
 /src/generated/prisma
 prisma/dev.db
 prisma/*.db-journal
+
+# ignore frontend build & modules
+/frontend/dist/
+/frontend/node_modules/
