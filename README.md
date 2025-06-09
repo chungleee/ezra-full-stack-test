@@ -34,3 +34,20 @@ npm run dev
 ```
 open http://localhost:3000
 ```
+
+5. Install frontend dependencies
+
+```
+cd frontend
+npm install
+```
+
+6. Run frontend
+
+```
+npm run dev
+```
+
+```
+open http://localhost:5173
+```
