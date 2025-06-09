@@ -9,6 +9,7 @@ tasks.post(
 	validator("json", (value, c) => {
 		const name = value["name"];
 		if (!name.length) {
+			c.status(400);
 			return c.json({
 				type: "error",
 				message: "Name field is empty",
@@ -38,6 +39,39 @@ tasks.get("/", async (c) => {
 	return c.json({
 		tasks,
 	});
+});
+
+tasks.patch("/:id", async (c) => {
+	const { id } = c.req.param();
+
+	const taskId = Number(id);
+
+	const foundTask = await prisma.task.findUnique({
+		where: {
+			id: taskId,
+		},
+	});
+
+	if (!foundTask) {
+		c.status(404);
+		return c.json({ type: "error", message: "Task not found" });
+	}
+
+	const updatedTask = await prisma.task.update({
+		where: {
+			id: taskId,
+		},
+		data: {
+			completed: !foundTask.completed,
+		},
+	});
+
+	if (!updatedTask) {
+		c.status(400);
+		return c.json({ type: "error", message: "Something went wrong" });
+	}
+
+	return c.json({ type: "success", data: updatedTask });
 });
 
 export default tasks;
