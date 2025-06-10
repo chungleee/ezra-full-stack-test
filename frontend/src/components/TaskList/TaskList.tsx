@@ -1,22 +1,10 @@
-import React, { useEffect, useState } from "react";
 import type { Task } from "../../types";
-import { getAllTasksAPI } from "../../api/TasksAPI";
 
-const TaskList = () => {
-	const [tasks, setTasks] = useState<Task[]>([]);
+interface TaskListProps {
+	tasks: Task[];
+}
 
-	useEffect(() => {
-		const getTasks = async () => {
-			const result = await getAllTasksAPI();
-
-			if (result.type === "success") {
-				setTasks(result.data);
-			}
-		};
-
-		getTasks();
-	}, []);
-
+const TaskList = ({ tasks }: TaskListProps) => {
 	return (
 		<section>
 			<ul>

@@ -1,8 +1,13 @@
 import React, { useState, type ChangeEvent } from "react";
 import styles from "./AddTask.module.scss";
 import { createTaskAPI } from "../../api/TasksAPI";
+import type { Task } from "../../types";
 
-const AddTask = () => {
+interface AddTaskProps {
+	handleNewTask: (newTask: Task) => void;
+}
+
+const AddTask = ({ handleNewTask }: AddTaskProps) => {
 	const [input, setInput] = useState("");
 	const [inputError, setInputError] = useState("");
 
@@ -18,7 +23,12 @@ const AddTask = () => {
 			setInputError("Field can't be empty");
 			return;
 		}
-		await createTaskAPI(input);
+
+		const res = await createTaskAPI(input);
+		if (res.type === "success") {
+			handleNewTask(res.data);
+			setInput("");
+		}
 	};
 
 	return (
