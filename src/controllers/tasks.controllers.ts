@@ -20,7 +20,8 @@ export const getAllTasks = async (c: Context) => {
 	const tasks = await prisma.task.findMany();
 
 	return c.json({
-		tasks,
+		type: "success",
+		data: tasks,
 	});
 };
 
@@ -55,4 +56,22 @@ export const updateTaskById = async (c: Context) => {
 	}
 
 	return c.json({ type: "success", data: updatedTask });
+};
+
+export const deleteTaskById = async (c: Context) => {
+	const { id } = c.req.param();
+	const taskId = Number(id);
+
+	try {
+		const deletedTask = await prisma.task.delete({
+			where: {
+				id: taskId,
+			},
+		});
+
+		return c.json({ type: "success", data: deletedTask });
+	} catch (error) {
+		c.status(404);
+		return c.json({ type: "error", message: "Task doesn't exist" });
+	}
 };

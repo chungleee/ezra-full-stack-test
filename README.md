@@ -7,10 +7,10 @@
 
 https://nodejs.org
 
-1. Install dependencies
+1. Install dependencies (will install both backend & frontend)
 
 ```
-npm install
+npm run install:all
 ```
 
 2. Copy from .env.example to .env
@@ -25,12 +25,13 @@ cp .env.example .env
 npx prisma db push
 ```
 
-4. Start dev server
+4. Start dev server (both backend & frontend)
 
 ```
 npm run dev
 ```
 
 ```
-open http://localhost:3000
+frontend running on http://localhost:5173/
+backend running on http://localhost:3000
 ```
