@@ -20,7 +20,8 @@ export const getAllTasks = async (c: Context) => {
 	const tasks = await prisma.task.findMany();
 
 	return c.json({
-		tasks,
+		type: "success",
+		data: tasks,
 	});
 };
 
