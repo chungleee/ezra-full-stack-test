@@ -1,30 +1,10 @@
-import { useEffect, useState } from "react";
 import styles from "./App.module.scss";
 import AddTask from "./components/AddTask/AddTask";
 import TaskList from "./components/TaskList/TaskList";
-import type { Task } from "./types";
-import { getAllTasksAPI } from "./api/TasksAPI";
+import { useTasks } from "./hooks/useTasks";
 
 function App() {
-	const [tasks, setTasks] = useState<Task[]>([]);
-
-	useEffect(() => {
-		const getTasks = async () => {
-			const result = await getAllTasksAPI();
-
-			if (result.type === "success") {
-				setTasks(result.data);
-			}
-		};
-
-		getTasks();
-	}, []);
-
-	const handleNewTask = (newTask: Task) => {
-		setTasks((prev) => {
-			return [...prev, newTask];
-		});
-	};
+	const { tasks, handleNewTask } = useTasks();
 
 	return (
 		<div className={styles.app}>

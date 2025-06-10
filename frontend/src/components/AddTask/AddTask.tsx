@@ -1,7 +1,7 @@
 import React, { useState, type ChangeEvent } from "react";
 import styles from "./AddTask.module.scss";
-import { createTaskAPI } from "../../api/TasksAPI";
 import type { Task } from "../../types";
+import { createTaskAPI } from "../../api/TasksAPI";
 
 interface AddTaskProps {
 	handleNewTask: (newTask: Task) => void;
