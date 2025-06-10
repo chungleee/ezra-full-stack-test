@@ -1,0 +1,17 @@
+.add_task {
+	display: flex;
+	column-gap: 1rem;
+
+	.add_task__input {
+		display: flex;
+		flex-direction: column;
+
+		input {
+			min-height: 100%;
+		}
+
+		small {
+			color: red;
+		}
+	}
+}
