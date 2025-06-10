@@ -1,5 +1,6 @@
 import React, { useState, type ChangeEvent } from "react";
 import styles from "./AddTask.module.scss";
+import { createTaskAPI } from "../../api/TasksAPI";
 
 const AddTask = () => {
 	const [input, setInput] = useState("");
@@ -12,12 +13,12 @@ const AddTask = () => {
 		setInput(e.target.value);
 	};
 
-	const handleSubmit = () => {
+	const handleSubmit = async () => {
 		if (!input) {
 			setInputError("Field can't be empty");
 			return;
 		}
-		console.log("input: ", input);
+		await createTaskAPI(input);
 	};
 
 	return (

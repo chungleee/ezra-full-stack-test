@@ -7,11 +7,10 @@ const TaskList = () => {
 
 	useEffect(() => {
 		const getTasks = async () => {
-			const { type, data } = await getAllTasksAPI();
+			const result = await getAllTasksAPI();
 
-			if (type === "success") {
-				console.log(data);
-				setTasks(data);
+			if (result.type === "success") {
+				setTasks(result.data);
 			}
 		};
 
