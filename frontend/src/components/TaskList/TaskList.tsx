@@ -4,9 +4,10 @@ import Icon from "../common/Icon";
 
 interface TaskListProps {
 	tasks: Task[];
+	handleUpdateTask: (id: number) => Promise<void>;
 }
 
-const TaskList = ({ tasks }: TaskListProps) => {
+const TaskList = ({ tasks, handleUpdateTask }: TaskListProps) => {
 	return (
 		<section className={styles.tasklist}>
 			<ul>
@@ -15,7 +16,7 @@ const TaskList = ({ tasks }: TaskListProps) => {
 						<li key={task.id}>
 							<span>{task.name}</span>
 							<div>
-								<span>
+								<span onClick={() => handleUpdateTask(task.id)}>
 									{task.completed ? (
 										<Icon variant='check' />
 									) : (

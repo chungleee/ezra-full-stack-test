@@ -1,13 +1,12 @@
 import React, { useState, type ChangeEvent } from "react";
 import styles from "./AddTask.module.scss";
-import type { Task } from "../../types";
-import { createTaskAPI } from "../../api/TasksAPI";
+import type { ApiResponse, Task } from "../../types";
 
 interface AddTaskProps {
-	handleNewTask: (newTask: Task) => void;
+	handleCreateTask: (taskName: string) => Promise<ApiResponse<Task>>;
 }
 
-const AddTask = ({ handleNewTask }: AddTaskProps) => {
+const AddTask = ({ handleCreateTask }: AddTaskProps) => {
 	const [input, setInput] = useState("");
 	const [inputError, setInputError] = useState("");
 
@@ -24,9 +23,8 @@ const AddTask = ({ handleNewTask }: AddTaskProps) => {
 			return;
 		}
 
-		const res = await createTaskAPI(input);
+		const res = await handleCreateTask(input);
 		if (res.type === "success") {
-			handleNewTask(res.data);
 			setInput("");
 		}
 	};

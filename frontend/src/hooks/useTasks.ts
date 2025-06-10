@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import type { Task } from "../types";
-import { getAllTasksAPI } from "../api/TasksAPI";
+import { createTaskAPI, getAllTasksAPI, updateTaskAPI } from "../api/TasksAPI";
 
 export const useTasks = () => {
 	const [tasks, setTasks] = useState<Task[]>([]);
@@ -17,11 +17,30 @@ export const useTasks = () => {
 		getTasks();
 	}, []);
 
-	const handleNewTask = (newTask: Task) => {
-		setTasks((prev) => {
-			return [...prev, newTask];
-		});
+	const handleCreateTask = async (taskName: string) => {
+		const res = await createTaskAPI(taskName);
+		if (res.type === "success") {
+			setTasks((prev) => {
+				return [...prev, res.data];
+			});
+		}
+		return res;
 	};
 
-	return { tasks, setTasks, handleNewTask };
+	const handleUpdateTask = async (taskId: number) => {
+		const res = await updateTaskAPI(taskId);
+
+		if (res.type === "success") {
+			setTasks((prev) => {
+				return prev.map((t) => {
+					if (t.id === res.data.id) {
+						t = res.data;
+					}
+					return t;
+				});
+			});
+		}
+	};
+
+	return { tasks, setTasks, handleUpdateTask, handleCreateTask };
 };

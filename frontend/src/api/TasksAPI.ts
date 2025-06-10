@@ -22,3 +22,12 @@ export const createTaskAPI = async (
 
 	return data;
 };
+
+export const updateTaskAPI = async (id: number): Promise<ApiResponse<Task>> => {
+	const result = await fetch(`/api/tasks/${id}`, {
+		method: "PATCH",
+	});
+
+	const data = await result.json();
+	return data;
+};
