@@ -26,7 +26,9 @@ const AddTask = () => {
 				<input type='text' value={input} onChange={handleOnChange} />
 				{inputError && <small>{inputError}</small>}
 			</div>
-			<button onClick={handleSubmit}>add</button>
+			<button disabled={!input} onClick={handleSubmit}>
+				add
+			</button>
 		</section>
 	);
 };
