@@ -1,6 +1,11 @@
 import { useEffect, useState } from "react";
 import type { Task } from "../types";
-import { createTaskAPI, getAllTasksAPI, updateTaskAPI } from "../api/TasksAPI";
+import {
+	createTaskAPI,
+	deleteTaskAPI,
+	getAllTasksAPI,
+	updateTaskAPI,
+} from "../api/TasksAPI";
 
 export const useTasks = () => {
 	const [tasks, setTasks] = useState<Task[]>([]);
@@ -42,5 +47,22 @@ export const useTasks = () => {
 		}
 	};
 
-	return { tasks, setTasks, handleUpdateTask, handleCreateTask };
+	const handleDeleteTask = async (taskId: number) => {
+		const res = await deleteTaskAPI(taskId);
+		if (res.type === "success") {
+			setTasks((prev) => {
+				return prev.filter((t) => {
+					return t.id !== res.data.id;
+				});
+			});
+		}
+	};
+
+	return {
+		tasks,
+		setTasks,
+		handleUpdateTask,
+		handleCreateTask,
+		handleDeleteTask,
+	};
 };

@@ -31,3 +31,12 @@ export const updateTaskAPI = async (id: number): Promise<ApiResponse<Task>> => {
 	const data = await result.json();
 	return data;
 };
+
+export const deleteTaskAPI = async (id: number): Promise<ApiResponse<Task>> => {
+	const result = await fetch(`/api/tasks/${id}`, {
+		method: "DELETE",
+	});
+
+	const data = await result.json();
+	return data;
+};

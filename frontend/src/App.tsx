@@ -4,13 +4,18 @@ import TaskList from "./components/TaskList/TaskList";
 import { useTasks } from "./hooks/useTasks";
 
 function App() {
-	const { tasks, handleUpdateTask, handleCreateTask } = useTasks();
+	const { tasks, handleUpdateTask, handleCreateTask, handleDeleteTask } =
+		useTasks();
 
 	return (
 		<div className={styles.app}>
 			<h1>Leon's Ezra Take Home Assignment</h1>
 			<AddTask handleCreateTask={handleCreateTask} />
-			<TaskList tasks={tasks} handleUpdateTask={handleUpdateTask} />
+			<TaskList
+				tasks={tasks}
+				handleUpdateTask={handleUpdateTask}
+				handleDeleteTask={handleDeleteTask}
+			/>
 		</div>
 	);
 }

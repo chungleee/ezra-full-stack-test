@@ -11,6 +11,7 @@ const AddTask = ({ handleCreateTask }: AddTaskProps) => {
 	const [inputError, setInputError] = useState("");
 
 	const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
+		// remove error if exists
 		if (inputError) {
 			setInputError("");
 		}
