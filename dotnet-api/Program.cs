@@ -26,7 +26,8 @@ app.UseHttpsRedirection();
 
 app.MapGet("/api/tasks/", async (AppDbContext db) =>
 {
-    return await db.Tasks.ToListAsync();
+    var tasks = await db.Tasks.ToListAsync();
+    return Results.Ok(new { type = "success", data = tasks });
 });
 
 app.MapPost("/api/tasks/", async (CreateTaskItemDTO task, AppDbContext db) =>
