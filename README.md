@@ -56,3 +56,58 @@ npm install
 ```
 npm run dev
 ```
+
+### Swapping to Dotnet API
+
+1. Close Nodejs server
+
+2. Close frontend vite server and navigate to frontend/vite.config.ts and swap endpoints
+
+```
+// in frontend/vite.config.ts
+comment out line 9
+uncomment line 10
+
+http://localhost:5112 should now be in use
+```
+
+3. Start vite server
+
+```npm run dev
+
+```
+
+4. In a new terminal tab, navigate to dotnet-api folder
+
+```
+if comming from frontend/ folder
+
+cd ../dotnet-api/
+
+if coming from root
+
+cd dotnet-api/
+```
+
+5. Start dotnet api server
+
+```
+dotnet run
+
+Server should be running on http://localhost:5112
+```
+
+Thoughts on this test:
+
+- building the frontend and backend with javascript/typescript was smooth as i'm confortable in this environment
+
+- i'm not the best visual designer so I kept the the look fairly simple, centered and not cluttered
+
+- the hardest part was definitely learning dotnet since it's my first time:
+
+  - I made use of microsofts documentation to install the prerequisites and to start writing code
+  - looked up best practices / conventions to keep organized
+  - made use of gemini/chatgpt to explain and learn what namespaces / using / etc keywords meant
+
+  - lots to learn but i like the opionated approach and structure
+  - I enjoyed it since i got to learn something new and outside of comfort
