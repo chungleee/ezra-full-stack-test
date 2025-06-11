@@ -56,3 +56,43 @@ npm install
 ```
 npm run dev
 ```
+
+### Swapping to Dotnet API
+
+1. Close Nodejs server
+
+2. Close frontend vite server and navigate to frontend/vite.config.ts and swap endpoints
+
+```
+// in frontend/vite.config.ts
+comment out line 9
+uncomment line 10
+
+http://localhost:5112 should now be in use
+```
+
+3. Start vite server
+
+```npm run dev
+
+```
+
+4. In a new terminal tab, navigate to dotnet-api folder
+
+```
+if comming from frontend/ folder
+
+cd ../dotnet-api/
+
+if coming from root
+
+cd dotnet-api/
+```
+
+5. Start dotnet api server
+
+```
+dotnet run
+
+Server should be running on http://localhost:5112
+```
