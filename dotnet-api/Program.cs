@@ -59,6 +59,19 @@ app.MapPatch("/api/tasks/{id}", async (int id, AppDbContext db) =>
     return Results.Ok(new { type = "success", data = foundTask });
 });
 
+app.MapDelete("/api/tasks/{id}", async (int id, AppDbContext db) =>
+{
+    var deleteTask = await db.Tasks.FindAsync(id);
+    if (deleteTask is null)
+    {
+        return Results.NotFound(new { type = "error", message = "Task not found" });
+    }
+
+    db.Tasks.Remove(deleteTask);
+    await db.SaveChangesAsync();
+    return Results.Ok(new { type = "success", data = deleteTask });
+});
+
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
