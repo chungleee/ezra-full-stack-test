@@ -46,6 +46,19 @@ app.MapPost("/api/tasks/", async (CreateTaskItemDTO task, AppDbContext db) =>
     });
 });
 
+app.MapPatch("/api/tasks/{id}", async (int id, AppDbContext db) =>
+{
+    var foundTask = await db.Tasks.FindAsync(id);
+    if (foundTask is null)
+    {
+        return Results.NotFound(new { type = "error", message = "Task not found" });
+    }
+
+    foundTask.Completed = !foundTask.Completed;
+    await db.SaveChangesAsync();
+    return Results.Ok(new { type = "success", data = foundTask });
+});
+
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
