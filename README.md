@@ -96,3 +96,18 @@ dotnet run
 
 Server should be running on http://localhost:5112
 ```
+
+Thoughts on this test:
+
+- building the frontend and backend with javascript/typescript was smooth as i'm confortable in this environment
+
+- i'm not the best visual designer so I kept the the look fairly simple, centered and not cluttered
+
+- the hardest part was definitely learning dotnet since it's my first time:
+
+  - I made use of microsofts documentation to install the prerequisites and to start writing code
+  - looked up best practices / conventions to keep organized
+  - made use of gemini/chatgpt to explain and learn what namespaces / using / etc keywords meant
+
+  - lots to learn but i like the opionated approach and structure
+  - I enjoyed it since i got to learn something new and outside of comfort
